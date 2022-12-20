@@ -1,16 +1,26 @@
-# 18 задача
-class Alchemy():
-    def __init__(self, element):
-        self.element = element
+class Member:
+    def __init__(self, name, post=None, x=0):
+        self.name = name
+        self.post = post
+        self.salary = x
 
-    def __add__(self, other):
-        return Alchemy(self.element[0:3] + other.element[-3:])
-    def hard_element(self,other):
-        return Alchemy(self.element[0:3]*len(other.element))
+    def example(self, x):
+        self.salary = x
+        print('Оклад равен', round(self.salary) * 1.3)
+
+    def __str__(self):
+        return f'{self.name}: {self.post} \n{self.name}:{self.salary}'
 
 
-element1 = Alchemy('Oxygen')
-element2 = Alchemy('gold')
-element3 = (element1 + element2)
-element4 = hard_element
-print(element3.element)
+class Manager(Member):
+    def __init__(self, name,post, salary):
+        super().__init__(name,post, salary)
+
+    def example(self, x,y):
+        self.salary *=x
+        print('Зарплата c надбавками равна', round((self.salary * x) * y))
+
+
+ivan = Manager('Ivan', 'Manager',1700)
+ivan.example( 1.3,1.2)
+print(ivan)
